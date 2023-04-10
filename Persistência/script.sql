@@ -1,6 +1,13 @@
 create database itil;
 use itil;
 
+create table Categoria (
+	id int auto_increment,
+    categoria varchar(20) not null unique,
+    prazo varchar(10) not null,
+    constraint pk_categoria primary key (id) 
+);
+
 create table chamados (
 	numero int auto_increment,
     dataAbertura date,
@@ -17,10 +24,3 @@ create table chamados (
 );
 
 alter table chamados auto_increment = 100100;
-
-create table Categoria (
-	id int auto_increment,
-    categoria varchar(20) not null unique,
-    prazo varchar(10) not null,
-    constraint pk_categoria primary key (id) 
-);

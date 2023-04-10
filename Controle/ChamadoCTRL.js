@@ -1,3 +1,10 @@
+/* Trabalho final da matéria: PROCESSAMENTO DE LINGUAGEM NATURAL E CHATBOT
+   Professor Renato
+   Aluno: Junior Freire Oliva RA: 10482110183
+
+   Link do video: https://www.loom.com/share/6d0aa79851234b9786f9ce5628959f7c
+*/
+
 import Categoria from "../Modelo/Categoria.js";
 import Chamado from "../Modelo/Chamado.js";
 import objChamado from "../Persistência/objChamado.js";
@@ -12,7 +19,7 @@ export default class ChamadoCTRL {
         const payload = requisicao.body;
         const intencao = payload['queryResult']['intent']
 
-        const tecnicos = ['José', 'Maria', 'Ricardo', 'Priscila', 'Matheus'];
+        const tecnicos = ['José', 'Maria', 'Ricardo', 'Priscila', 'Matheus', "Bruno", "Luís", "Gabriel"];
 
         //Prepara um objeto para ser persistido, caso haja a confirmação da abertura do chamado.
         objChamado['tecnico'] = tecnicos[Math.floor(Math.random() * (tecnicos.length - 1))];
@@ -119,7 +126,7 @@ export default class ChamadoCTRL {
                 let resp = { fulfillmentMessages: [] };
                 let aceite = payload["queryResult"]["action"];
                 if (aceite === "CitarUsuario.CitarUsuario-yes") {
-                    const chamado = new Chamado(0, objChamado.dataAbertura, "2023-04-10",  objChamado.usuario,
+                    const chamado = new Chamado(0, objChamado.dataAbertura, "2023-04-11",  objChamado.usuario,
                         parseInt(objChamado.matricula), objChamado.id_categoria, objChamado.prioridade, objChamado.tecnico, "ABERTO");
                     let numero = await chamado.incluir(chamado);
                     if  (numero) {
@@ -128,8 +135,8 @@ export default class ChamadoCTRL {
                             {
                                 "text": {
                                     "text": [
-                                        `Pronto, Nº do chamado gerado: ${objChamado.numero}. Nome do técnico a quem foi atribuído o atendimento: ${objChamado.tecnico}. 
-                                        Prazo para atendimento ${objChamado.prazo}. Em breve o técnico fará o contato, obrigado por utilizar a nossa central. Até logo!` 
+                                        `Pronto, o nº do chamado gerado é: ${objChamado.numero}. O técnico que fará o atendimento: ${objChamado.tecnico}. 
+                                        Prazo para atendimento ${objChamado.prazo}. Obrigado por utilizar a nossa central. Até logo!` 
                                     ]
                                 }
                             }
